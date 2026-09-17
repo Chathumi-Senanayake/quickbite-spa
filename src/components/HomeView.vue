@@ -7,7 +7,7 @@ const { products, loading, fetchProducts } = useProducts()
 fetchProducts()
 
 // The burger image you are currently using
-const burgerImg = 'https://img.freepik.com/premium-photo/chicken-burger-with-tomatoes-lettuce_841543-25937.jpg'
+const burgerImg = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9nYGuxFpOcXisFjs4MIfRzAzqjCeri.png'
 
 const searchQuery = ref('')
 const selectedCategory = ref('All')
