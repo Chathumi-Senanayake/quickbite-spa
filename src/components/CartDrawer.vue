@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCart } from '../composables/useCart'
+import { formatLKR } from '../utils/currency'
 
 defineProps<{ isOpen: boolean }>()
 
@@ -40,7 +41,7 @@ const handleCheckout = () => {
           
           <div class="flex-1">
             <h4 class="text-zinc-900 dark:text-white font-semibold text-sm">{{ item.title }}</h4>
-            <p class="text-orange-500 font-bold">${{ (item.price * item.quantity).toFixed(2) }}</p>
+            <p class="text-orange-500 font-bold">{{ formatLKR(item.price * item.quantity) }}</p>
           </div>
 
           <div class="flex items-center bg-zinc-205 dark:bg-zinc-900 rounded-lg p-1 border border-zinc-300 dark:border-zinc-700 transition-all">
@@ -68,22 +69,22 @@ const handleCheckout = () => {
 
             <div class="flex justify-between text-sm text-zinc-600 dark:text-zinc-300">
                 <span>Subtotal</span>
-                <span>${{ cartTotal }}</span>
+                <span>{{ formatLKR(cartTotal) }}</span>
             </div>
 
             <div class="flex justify-between text-sm text-zinc-600 dark:text-zinc-300">
                 <span>Delivery Fee</span>
-                <span>$2.50</span>
+                <span>{{ formatLKR(2.50) }}</span>
             </div>
 
             <div class="flex justify-between text-sm text-orange-500">
                 <span>Discount (QUICK20)</span>
-                <span>-$5.00</span>
+                <span>-{{ formatLKR(5.00) }}</span>
             </div>
 
             <div class="flex justify-between text-zinc-900 dark:text-white text-2xl font-black pt-2 border-t border-zinc-200 dark:border-zinc-800 mt-2">
                 <span>Total</span>
-                <span>${{ (parseFloat(cartTotal) + 2.50 - 5.00).toFixed(2) }}</span>
+                <span>{{ formatLKR(parseFloat(cartTotal) + 2.50 - 5.00) }}</span>
             </div>
 
             <button 

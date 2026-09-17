@@ -64,6 +64,41 @@ export const useAuth = () => {
     }
   }
 
+  const register = async (usernameInput: string, emailInput: string, passwordInput: string) => {
+    loading.value = true
+    error.value = null
+    try {
+      if (passwordInput.length < 6) {
+        throw new Error('Password must be at least 6 characters long')
+      }
+
+      const registeredUser: User = {
+        id: Date.now(),
+        username: usernameInput,
+        email: emailInput,
+        firstName: usernameInput,
+        lastName: '',
+        gender: '',
+        image: `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(usernameInput)}`,
+        phone: '',
+        address: '',
+        city: '',
+        postalCode: ''
+      }
+
+      token.value = `quickbite_${Date.now()}`
+      user.value = registeredUser
+      localStorage.setItem('quickbite_token', token.value)
+      localStorage.setItem('quickbite_user', JSON.stringify(registeredUser))
+      return true
+    } catch (err: any) {
+      error.value = err.message || 'Failed to create your account.'
+      return false
+    } finally {
+      loading.value = false
+    }
+  }
+
   const logout = () => {
     token.value = null
     user.value = null
@@ -86,6 +121,7 @@ export const useAuth = () => {
     loading,
     error,
     login,
+    register,
     logout,
     updateProfile
   }

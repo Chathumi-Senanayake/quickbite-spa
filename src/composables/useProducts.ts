@@ -19,8 +19,9 @@ export const useProducts = () => {
       const data = await response.json()
       
       products.value = data.recipes.map((item: any) => {
-        // Deterministically generate a simulated price based on prep + cook time
-        const price = parseFloat(((item.prepTimeMinutes + item.cookTimeMinutes) * 0.15 + 6.99).toFixed(2))
+        // Keep recipe prices in the requested Sri Lankan rupee range.
+        const cookingTime = item.prepTimeMinutes + item.cookTimeMinutes
+        const price = Math.min(1000, Math.max(500, 500 + cookingTime * 5))
         // Apply discount to some recipes
         const discount = item.id % 3 === 0 ? 15 : item.id % 5 === 0 ? 25 : 0
         

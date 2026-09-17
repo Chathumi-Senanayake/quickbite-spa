@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 import { useCart } from '../composables/useCart'
+import { formatLKR } from '../utils/currency'
 
 const router = useRouter()
 const { user, isLoggedIn, logout, updateProfile } = useAuth()
@@ -175,7 +176,7 @@ const handleLogout = () => {
                   <h4 class="text-zinc-900 dark:text-white font-semibold text-sm leading-tight">{{ item.title }}</h4>
                   <span class="text-zinc-400 text-xs">Qty: {{ item.quantity }}</span>
                 </div>
-                <div class="text-right text-orange-500 font-bold">${{ (item.price * item.quantity).toFixed(2) }}</div>
+                <div class="text-right text-orange-500 font-bold">{{ formatLKR(item.price * item.quantity) }}</div>
               </div>
             </div>
 
@@ -190,19 +191,19 @@ const handleLogout = () => {
               <div class="w-full sm:w-60 space-y-2 font-medium">
                 <div class="flex justify-between">
                   <span>Subtotal</span>
-                  <span>${{ order.subtotal }}</span>
+                  <span>{{ formatLKR(order.subtotal) }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span>Delivery</span>
-                  <span>$2.50</span>
+                  <span>{{ formatLKR(2.50) }}</span>
                 </div>
                 <div class="flex justify-between text-orange-500">
                   <span>Discount</span>
-                  <span>-${{ order.discount }}</span>
+                  <span>-{{ formatLKR(order.discount) }}</span>
                 </div>
                 <div class="flex justify-between text-zinc-900 dark:text-white font-black text-lg pt-2 border-t border-zinc-100 dark:border-zinc-800">
                   <span>Total Paid</span>
-                  <span>${{ order.total }}</span>
+                  <span>{{ formatLKR(order.total) }}</span>
                 </div>
               </div>
             </div>
