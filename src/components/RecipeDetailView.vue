@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCart } from '../composables/useCart'
 import type { Product, Recipe } from '../types'
+import { formatLKR } from '../utils/currency'
 
 const route = useRoute()
 const router = useRouter()
@@ -144,8 +145,8 @@ onMounted(() => {
           <div class="flex flex-col">
             <span class="text-zinc-500 text-xs font-bold uppercase tracking-wider mb-1 font-mono">Special Price</span>
             <div class="flex items-baseline space-x-2">
-              <span class="text-orange-500 text-3xl font-black">${{ displayPrices.final.toFixed(2) }}</span>
-              <span v-if="displayPrices.discount" class="text-zinc-500 line-through text-sm">${{ displayPrices.original.toFixed(2) }}</span>
+              <span class="text-orange-500 text-3xl font-black">{{ formatLKR(displayPrices.final) }}</span>
+              <span v-if="displayPrices.discount" class="text-zinc-500 line-through text-sm">{{ formatLKR(displayPrices.original) }}</span>
             </div>
           </div>
           <button 

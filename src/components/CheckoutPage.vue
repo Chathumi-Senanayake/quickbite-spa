@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useCart } from '../composables/useCart'
 import { useAuth } from '../composables/useAuth'
+import { formatLKR } from '../utils/currency'
 
 // This defines the signals this page sends back to App.vue
 const emit = defineEmits(['close', 'place-order'])
@@ -126,19 +127,19 @@ const handlePlaceOrder = () => {
             <h3 class="text-left text-zinc-500 dark:text-zinc-400 font-bold text-sm uppercase tracking-wider">Order Summary</h3>
             <div class="flex justify-between text-zinc-650 dark:text-zinc-400">
               <span>Subtotal</span>
-              <span>${{ cartTotal }}</span>
+              <span>{{ formatLKR(cartTotal) }}</span>
             </div>
             <div class="flex justify-between text-zinc-650 dark:text-zinc-400">
               <span>Delivery Fee</span>
-              <span>$2.50</span>
+              <span>{{ formatLKR(2.50) }}</span>
             </div>
             <div class="flex justify-between text-orange-500">
               <span>Discount</span>
-              <span>-$5.00</span>
+              <span>-{{ formatLKR(5.00) }}</span>
             </div>
             <div class="flex justify-between text-zinc-900 dark:text-white text-2xl font-black pt-4 border-t border-zinc-200 dark:border-zinc-800">
               <span>Total</span>
-              <span>${{ (parseFloat(cartTotal) + 2.50 - 5.00).toFixed(2) }}</span>
+              <span>{{ formatLKR(parseFloat(cartTotal) + 2.50 - 5.00) }}</span>
             </div>
             
             <button 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCart } from '../composables/useCart'
 import type { Product } from '../types'
+import { formatLKR } from '../utils/currency'
 
 const props = defineProps<{
   product: Product
@@ -40,8 +41,8 @@ const displayPrice = props.product.discount
     <div class="px-5 pb-5 pt-0 flex flex-col space-y-2">
       <div class="flex justify-between items-center pt-2 border-t border-zinc-100 dark:border-zinc-800/50">
         <div class="flex flex-col">
-          <span class="text-orange-500 font-black text-xl">${{ displayPrice.toFixed(2) }}</span>
-          <span v-if="product.discount" class="text-zinc-400 dark:text-zinc-500 line-through text-xs">${{ product.price.toFixed(2) }}</span>
+          <span class="text-orange-500 font-black text-xl">{{ formatLKR(displayPrice) }}</span>
+          <span v-if="product.discount" class="text-zinc-400 dark:text-zinc-500 line-through text-xs">{{ formatLKR(product.price) }}</span>
         </div>
         
         <button 
