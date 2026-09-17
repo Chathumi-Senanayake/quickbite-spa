@@ -7,7 +7,7 @@ const { products, loading, fetchProducts } = useProducts()
 fetchProducts()
 
 // The burger image you are currently using
-const burgerImg = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9nYGuxFpOcXisFjs4MIfRzAzqjCeri.png'
+const burgerImg = '/burger-hero.png'
 
 const searchQuery = ref('')
 const selectedCategory = ref('All')
@@ -73,7 +73,7 @@ const clearSearch = () => {
       </div>
 
       <div 
-        class="hidden lg:block absolute -right-12 top-1/2 -translate-y-1/2 w-[550px] h-[450px]"
+        class="block absolute right-[-4.5rem] top-1/2 -translate-y-1/2 w-[430px] h-[360px] md:w-[500px] md:h-[410px] lg:right-[-3rem] lg:w-[550px] lg:h-[450px]"
         style="
           -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
           mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
