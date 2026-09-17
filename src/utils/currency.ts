@@ -1,13 +1,12 @@
-const USD_TO_LKR = 300
+export function formatLKR(amountInLKR: number | string): string {
+  const amount = typeof amountInLKR === 'string'
+    ? Number.parseFloat(amountInLKR)
+    : amountInLKR
 
-export function formatLKR(amountInBaseCurrency: number | string): string {
-  const amount = typeof amountInBaseCurrency === 'string'
-    ? Number.parseFloat(amountInBaseCurrency)
-    : amountInBaseCurrency
+  const formattedAmount = new Intl.NumberFormat('en-LK', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(Number.isFinite(amount) ? amount : 0)
 
-  return new Intl.NumberFormat('en-LK', {
-    style: 'currency',
-    currency: 'LKR',
-    maximumFractionDigits: 0,
-  }).format((Number.isFinite(amount) ? amount : 0) * USD_TO_LKR)
+  return `Rs.${formattedAmount}`
 }
